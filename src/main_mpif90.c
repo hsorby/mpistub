@@ -2,42 +2,31 @@
 #include <stdio.h> 
 #include <string.h> 
 
+#include "argcheck.h"
 
 int main(int argc, char* argv[])
 {
-char command[1024];
-int i = 1;
-char *parent = NULL, *baseDir = NULL;
-char *lastSlash;
+    char command[1024];
+    int i = 1;
+    int argCheckResult = -1;
 
-if (argc > 1)
-{
-lastSlash = strrchr(argv[0], '/'); // you need escape character
-parent = strndup(argv[0], lastSlash - argv[0]);
-lastSlash = strrchr(parent, '/');
-baseDir = strndup(parent, lastSlash - parent);
-free(parent);
-if (strcmp(argv[1], "-showme:compile") == 0)
-{
-printf("-I%s/include\n", baseDir);
-return 0;
-}
+    if (argc > 1)
+    {
+        argCheckResult = argcheck(argv[0], argv[1]);
+    }
 
-if (strcmp(argv[1], "-showme:link") == 0)
+    if (argCheckResult != -1)
+    {
+        return argCheckResult;
+    }
 
-{
-printf("-Wl,-rpath -Wl,%s/lib -lmpi\n", baseDir);
-return 0;
-}
-}
-strcpy(command, "gfortran");
-for (;i < argc;++i)
-{
-strcat(command, " ");
-strcat(command, argv[i]);
-}
-free(baseDir);
-printf("%s\n", command);
+    strcpy(command, "gfortran");
+    for (;i < argc;++i)
+    {
+        strcat(command, " ");
+        strcat(command, argv[i]);
+    }
+    //printf("%s\n", command);
     return system(command);
 }
 
