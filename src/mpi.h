@@ -11,8 +11,8 @@
    See the README file in the top-level LAMMPS directory.
 ------------------------------------------------------------------------ */
 
-#ifndef MPI_STUBS
-#define MPI_STUBS
+#ifndef MPI_STUB
+#define MPI_STUB
 
 #include <stdlib.h>
 
@@ -21,6 +21,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#define MPISTUB_VERSION "0.1.0"
 
 /* Dummy defs for MPI stubs */
 
