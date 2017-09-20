@@ -6,11 +6,10 @@
 int main(int argc, char* argv[])
 {
 char command[1024];
-int i = 0;
-strcpy(command, "gfortran");
+int i = 1;
+strcpy(command, "gcc");
 for (;i < argc;++i)
 {
-printf("%s\n", argv[i]);
 strcat(command, " ");
 strcat(command, argv[i]);
 }

@@ -1,13 +1,13 @@
 
+add_executable(mpiexec main_mpiexec.c)
+add_executable(mpicc main_mpic.c)
+add_executable(mpicxx main_mpicxx.c)
+add_executable(mpif90 main_mpif90.c)
+add_library(mpi mpi.c mpi.h)
 
-add_executable(mpic main.c)
-add_executable(mpicxx main.c)
-add_executable(mpifort main.c)
-add_library(mpistub mpi.c mpi.h)
+target_include_directories(mpi PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_include_directories(mpistub PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-
-install(TARGETS mpistub mpic mpicxx mpifort EXPORT mpistub-targets
+install(TARGETS mpi mpicc mpicxx mpif90 mpiexec EXPORT mpistub-targets
     RUNTIME DESTINATION bin
     INCLUDES DESTINATION include
     ARCHIVE DESTINATION lib
