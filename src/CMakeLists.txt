@@ -1,6 +1,6 @@
 
 add_executable(mpiexec main_mpiexec.c)
-add_executable(mpicc main_mpic.c)
+add_executable(mpicc main_mpicc.c)
 add_executable(mpicxx main_mpicxx.c)
 add_executable(mpif90 main_mpif90.c)
 add_library(mpi mpi.c mpi.h)
