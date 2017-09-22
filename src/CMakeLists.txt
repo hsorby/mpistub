@@ -9,8 +9,8 @@ target_include_directories(mpi PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 install(TARGETS mpi mpicc mpicxx mpif90 mpiexec EXPORT mpistub-targets
     RUNTIME DESTINATION bin
-    INCLUDES DESTINATION include
-    ARCHIVE DESTINATION lib
-    LIBRARY DESTINATION lib)
-install(FILES mpi.h mpif.h DESTINATION include)
-install(EXPORT mpistub-targets DESTINATION lib/cmake)
+    INCLUDES DESTINATION include/mpistub
+    ARCHIVE DESTINATION lib/mpistub
+    LIBRARY DESTINATION lib/mpistub)
+install(FILES mpi.h mpif.h DESTINATION include/mpistub)
+install(EXPORT mpistub-targets DESTINATION lib/mpistub)

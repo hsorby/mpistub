@@ -25,7 +25,7 @@ int argcheck(char *exe_path, char *argument)
 
     if (strcmp(argument, "-show") == 0)
     {
-        printf("-I%s/include -L%s/lib -lmpi\n", baseDir, baseDir);
+        printf("-I%s/include/mpistub -Wl,-rpath -Wl,%s/lib/mpistub -L%s/lib/mpistub -lmpi\n", baseDir, baseDir, baseDir);
         return 0;
     }
     free(baseDir);
