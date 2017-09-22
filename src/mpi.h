@@ -40,6 +40,18 @@ extern "C" {
 #define MPI_LONG_LONG 7
 #define MPI_DOUBLE_INT 8
 
+#define MPI_2INT              ((MPI_Datatype)0x4c000816)
+
+/* Fortran types */
+#define MPI_COMPLEX           ((MPI_Datatype)1275070494)
+#define MPI_DOUBLE_COMPLEX    ((MPI_Datatype)1275072546)
+#define MPI_LOGICAL           ((MPI_Datatype)1275069469)
+#define MPI_REAL              ((MPI_Datatype)1275069468)
+#define MPI_DOUBLE_PRECISION  ((MPI_Datatype)1275070495)
+#define MPI_INTEGER           ((MPI_Datatype)1275069467)
+#define MPI_2INTEGER          ((MPI_Datatype)1275070496)
+
+
 #define MPI_SUM 1
 #define MPI_MAX 2
 #define MPI_MIN 3
