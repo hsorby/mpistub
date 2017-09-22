@@ -6,7 +6,7 @@
 
 int main(int argc, char* argv[])
 {
-    char command[1024];
+    char command[16384];
     int i = 1;
     int argCheckResult = -1;
 
