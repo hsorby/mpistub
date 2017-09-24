@@ -622,4 +622,11 @@ int MPI_Alltoallv(void *sendbuf, int *sendcounts, int *sdispls,
   return 0;
 }
 
+int MPI_Type_struct(int count, const int *array_of_blocklengths,
+                    const MPI_Aint *array_of_displacements,
+                    const MPI_Datatype *array_of_types, MPI_Datatype *newtype)
+{
+  return 0;
+}
+
 /* ---------------------------------------------------------------------- */

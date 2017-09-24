@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int argcheck(char *exe_path, char *argument)
+int argcheck(char *exe_path, char *argument, int fortran)
 {
     char *parent = 0, *baseDir = 0;
     char *lastSlash;
@@ -25,7 +25,14 @@ int argcheck(char *exe_path, char *argument)
 
     if (strcmp(argument, "-show") == 0)
     {
-        printf("-I%s/include/mpistub -Wl,-rpath -Wl,%s/lib/mpistub -L%s/lib/mpistub -lmpi\n", baseDir, baseDir, baseDir);
+	if (fortran)
+	{
+            printf("-I%s/include/mpistub -Wl,-rpath -Wl,%s/lib/mpistub -L%s/lib/mpistub -lmpi -lmpifort\n", baseDir, baseDir, baseDir);
+	}
+	else 
+	{
+            printf("-I%s/include/mpistub -Wl,-rpath -Wl,%s/lib/mpistub -L%s/lib/mpistub -lmpi\n", baseDir, baseDir, baseDir);
+	}
         return 0;
     }
     free(baseDir);

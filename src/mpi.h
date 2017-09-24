@@ -29,28 +29,38 @@ extern "C" {
 #define MPI_COMM_WORLD 0
 
 #define MPI_SUCCESS   0
-#define MPI_ERR_ARG  -1
 
-#define MPI_INT 1
-#define MPI_FLOAT 2
-#define MPI_DOUBLE 3
-#define MPI_CHAR 4
-#define MPI_BYTE 5
-#define MPI_LONG 6
-#define MPI_LONG_LONG 7
-#define MPI_DOUBLE_INT 8
+/* Communication argument parameters */
+#define MPI_ERR_BUFFER       1      /* Invalid buffer pointer */
+#define MPI_ERR_COUNT        2      /* Invalid count argument */
+#define MPI_ERR_TYPE         3      /* Invalid datatype argument */
+#define MPI_ERR_TAG          4      /* Invalid tag argument */
+#define MPI_ERR_COMM         5      /* Invalid communicator */
+#define MPI_ERR_RANK         6      /* Invalid rank */
+#define MPI_ERR_ROOT         7      /* Invalid root */
+#define MPI_ERR_TRUNCATE    14      /* Message truncated on receive */
 
-#define MPI_2INT              ((MPI_Datatype)0x4c000816)
+/* MPI Objects (other than COMM) */
+#define MPI_ERR_GROUP        8      /* Invalid group */
+#define MPI_ERR_OP           9      /* Invalid operation */
+#define MPI_ERR_REQUEST     19      /* Invalid mpi_request handle */
 
-/* Fortran types */
-#define MPI_COMPLEX           ((MPI_Datatype)1275070494)
-#define MPI_DOUBLE_COMPLEX    ((MPI_Datatype)1275072546)
-#define MPI_LOGICAL           ((MPI_Datatype)1275069469)
-#define MPI_REAL              ((MPI_Datatype)1275069468)
-#define MPI_DOUBLE_PRECISION  ((MPI_Datatype)1275070495)
-#define MPI_INTEGER           ((MPI_Datatype)1275069467)
-#define MPI_2INTEGER          ((MPI_Datatype)1275070496)
+/* Special topology argument parameters */
+#define MPI_ERR_TOPOLOGY    10      /* Invalid topology */
+#define MPI_ERR_DIMS        11      /* Invalid dimension argument */
 
+/* All other arguments.  This is a class with many kinds */
+#define MPI_ERR_ARG         12      /* Invalid argument */
+
+/* Other errors that are not simply an invalid argument */
+#define MPI_ERR_OTHER       15      /* Other error; use Error_string */
+
+#define MPI_ERR_UNKNOWN     13      /* Unknown error */
+#define MPI_ERR_INTERN      16      /* Internal error code    */
+
+/* Multiple completion has three special error classes */
+#define MPI_ERR_IN_STATUS           17      /* Look in status for error value */
+#define MPI_ERR_PENDING             18      /* Pending request */
 
 #define MPI_SUM 1
 #define MPI_MAX 2
@@ -68,7 +78,6 @@ extern "C" {
 
 #define MPI_Comm int
 #define MPI_Request int
-#define MPI_Datatype int
 #define MPI_Op int
 #define MPI_Fint int
 #define MPI_Group int
@@ -77,6 +86,70 @@ extern "C" {
 #define MPI_IN_PLACE NULL
 
 #define MPI_MAX_PROCESSOR_NAME 128
+
+typedef int MPI_Datatype;
+#define MPI_CHAR           ((MPI_Datatype)0x4c000101)
+#define MPI_SIGNED_CHAR    ((MPI_Datatype)0x4c000118)
+#define MPI_UNSIGNED_CHAR  ((MPI_Datatype)0x4c000102)
+#define MPI_BYTE           ((MPI_Datatype)0x4c00010d)
+#define MPI_WCHAR          ((MPI_Datatype)0x4c00040e)
+#define MPI_SHORT          ((MPI_Datatype)0x4c000203)
+#define MPI_UNSIGNED_SHORT ((MPI_Datatype)0x4c000204)
+#define MPI_INT            ((MPI_Datatype)0x4c000405)
+#define MPI_UNSIGNED       ((MPI_Datatype)0x4c000406)
+#define MPI_LONG           ((MPI_Datatype)0x4c000807)
+#define MPI_UNSIGNED_LONG  ((MPI_Datatype)0x4c000808)
+#define MPI_FLOAT          ((MPI_Datatype)0x4c00040a)
+#define MPI_DOUBLE         ((MPI_Datatype)0x4c00080b)
+#define MPI_LONG_DOUBLE    ((MPI_Datatype)0x4c00100c)
+#define MPI_LONG_LONG_INT  ((MPI_Datatype)0x4c000809)
+#define MPI_UNSIGNED_LONG_LONG ((MPI_Datatype)0x4c000819)
+#define MPI_LONG_LONG      MPI_LONG_LONG_INT
+
+#define MPI_FLOAT_INT         ((MPI_Datatype)0x8c000000)
+#define MPI_DOUBLE_INT        ((MPI_Datatype)0x8c000001)
+#define MPI_LONG_INT          ((MPI_Datatype)0x8c000002)
+#define MPI_SHORT_INT         ((MPI_Datatype)0x8c000003)
+#define MPI_2INT              ((MPI_Datatype)0x4c000816)
+#define MPI_LONG_DOUBLE_INT   ((MPI_Datatype)0x8c000004)
+
+/* Fortran types */
+#define MPI_COMPLEX           ((MPI_Datatype)1275070494)
+#define MPI_DOUBLE_COMPLEX    ((MPI_Datatype)1275072546)
+#define MPI_LOGICAL           ((MPI_Datatype)1275069469)
+#define MPI_REAL              ((MPI_Datatype)1275069468)
+#define MPI_DOUBLE_PRECISION  ((MPI_Datatype)1275070495)
+#define MPI_INTEGER           ((MPI_Datatype)1275069467)
+#define MPI_2INTEGER          ((MPI_Datatype)1275070496)
+
+/* address/offset types */
+#define MPI_AINT          ((MPI_Datatype)0x4c000843)
+#define MPI_OFFSET        ((MPI_Datatype)0x4c000844)
+#define MPI_COUNT         ((MPI_Datatype)0x4c000845)
+
+#define MPI_PACKED         ((MPI_Datatype)0x4c00010f)
+#define MPI_LB             ((MPI_Datatype)0x4c000010)
+#define MPI_UB             ((MPI_Datatype)0x4c000011)
+
+#define MPI_TAG_UB           0x64400001
+#define MPI_HOST             0x64400003
+#define MPI_IO               0x64400005
+#define MPI_WTIME_IS_GLOBAL  0x64400007
+#define MPI_UNIVERSE_SIZE    0x64400009
+#define MPI_LASTUSEDCODE     0x6440000b
+#define MPI_APPNUM           0x6440000d
+
+/* In addition, there are 5 predefined window attributes that are
+   defined for every window */
+#define MPI_WIN_BASE          0x66000001
+#define MPI_WIN_SIZE          0x66000003
+#define MPI_WIN_DISP_UNIT     0x66000005
+#define MPI_WIN_CREATE_FLAVOR 0x66000007
+#define MPI_WIN_MODEL         0x66000009
+
+/* Definitions that are determined by configure. */
+typedef long MPI_Aint;
+typedef long long MPI_Count;
 
 typedef void MPI_User_function(void *invec, void *inoutvec,
                                int *len, MPI_Datatype *datatype);
@@ -186,6 +259,10 @@ int MPI_Alltoallv(void *sendbuf, int *sendcounts, int *sdispls,
                   MPI_Datatype sendtype,
                   void *recvbuf, int *recvcounts, int *rdispls,
                   MPI_Datatype recvtype, MPI_Comm comm);
+int MPI_Type_struct(int count, const int *array_of_blocklengths,
+                    const MPI_Aint *array_of_displacements,
+                    const MPI_Datatype *array_of_types, MPI_Datatype *newtype);
+
 /* ---------------------------------------------------------------------- */
 
 #ifdef __cplusplus

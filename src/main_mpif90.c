@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
 
     if (argc > 1)
     {
-        argCheckResult = argcheck(argv[0], argv[1]);
+        argCheckResult = argcheck(argv[0], argv[1], 1);
     }
 
     if (argCheckResult != -1)

@@ -1,7 +1,7 @@
 
 
 cmake_minimum_required(VERSION 3.4 FATAL_ERROR)
-project(mpistub VERSION 0.1.0 LANGUAGES C)
+project(mpistub VERSION 0.1.0 LANGUAGES C Fortran)
 
 option(BUILD_SHARED_LIBS "Build shared library." ON)
 
